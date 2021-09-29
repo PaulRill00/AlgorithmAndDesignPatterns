@@ -9,7 +9,7 @@
 
             System.Console.WriteLine("\n=====   Opgave 2 : Fibonacci   =====\n");
             Opgave2.Run();
-
+            return;
             System.Console.WriteLine("\n=====   Opgave 3 : OmEnOm   =====\n");
             Opgave3.Run();
 

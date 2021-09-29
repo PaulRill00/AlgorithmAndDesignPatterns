@@ -18,7 +18,37 @@ namespace AD
         /// Returns False otherwise.</returns>
         public static bool CheckBrackets(string s)
         {
-            throw new System.NotImplementedException();
+            var stack = new MyStack<char>();
+
+            try
+            {
+                foreach (var c in s)
+                {
+                    if (c.Equals(')'))
+                    {
+                        stack.Pop();
+                    }
+                    else
+                    {
+                        stack.Push(c);
+                    }
+                }
+            }
+            catch (MyStackEmptyException)
+            {
+                return false;
+            }
+
+
+            try
+            {
+                stack.Top();
+                return false;
+            }
+            catch (MyStackEmptyException)
+            {
+                return true;
+            }
         }
 
 
@@ -37,7 +67,40 @@ namespace AD
         /// Returns False otherwise.</returns>
         public static bool CheckBrackets2(string s)
         {
-            throw new System.NotImplementedException();
+            var stack = new MyStack<char>();
+
+            try
+            {
+                foreach (var c in s)
+                {
+                    if (c.Equals(')') || c.Equals(']') || c.Equals('}'))
+                    {
+                        var check = stack.Pop();
+                        if (c.Equals(')') && !check.Equals('(')) return false;
+                        if (c.Equals(']') && !check.Equals('[')) return false;
+                        if (c.Equals('}') && !check.Equals('{')) return false;
+                    }
+                    else
+                    {
+                        stack.Push(c);
+                    }
+                }
+            }
+            catch (MyStackEmptyException)
+            {
+                return false;
+            }
+
+
+            try
+            {
+                stack.Top();
+                return false;
+            }
+            catch (MyStackEmptyException)
+            {
+                return true;
+            }
         }
 
     }

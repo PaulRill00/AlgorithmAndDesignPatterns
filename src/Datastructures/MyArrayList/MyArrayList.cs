@@ -1,4 +1,7 @@
-﻿namespace AD
+﻿using System.Linq;
+using System.Text.Json;
+
+namespace AD
 {
     public partial class MyArrayList : IMyArrayList
     {
@@ -7,50 +10,71 @@
 
         public MyArrayList(int capacity)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            data = new int[capacity];
+            size = 0;
         }
 
         public void Add(int n)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (size + 1 > Capacity())
+            {
+                throw new MyArrayListFullException();
+            }
+
+            data[size++] = n;
         }
 
         public int Get(int index)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (index < 0 || index >= Size())
+            {
+                throw new MyArrayListIndexOutOfRangeException();
+            }
+
+            return data[index];
         }
 
         public void Set(int index, int n)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (index < 0 || index >= Size())
+            {
+                throw new MyArrayListIndexOutOfRangeException();
+            }
+
+            data[index] = n;
         }
 
         public int Capacity()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            return data.Length;
         }
 
         public int Size()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            return size;
         }
 
         public void Clear()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            data = new int[data.Length];
+            size = 0;
         }
 
         public int CountOccurences(int n)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            return data.Count(x => x == n);
+        }
+
+        public override string ToString()
+        {
+            var list = new int[size];
+
+            for (var i = 0; i < size; i++)
+            {
+                list[i] = data[i];
+            }
+
+            return size == 0 ? "NIL" : JsonSerializer.Serialize(list);
         }
     }
 }

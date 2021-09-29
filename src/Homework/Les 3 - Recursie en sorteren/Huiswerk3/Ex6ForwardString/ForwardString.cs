@@ -6,12 +6,15 @@ namespace AD
     {
         public static string ForwardString(List<int> list, int from)
         {
-            throw new System.NotImplementedException();
+            if (from >= list.Count) return "";
+            return list[from] + " " + ForwardString(list, ++from);
         }
         
         public static string BackwardString(List<int> list, int to)
         {
-            throw new System.NotImplementedException();
+            var oldTo = to;
+            if (to >= list.Count) return "";
+            return  BackwardString(list, ++to) + " " + list[oldTo];
         }
 
         public static void Run()
