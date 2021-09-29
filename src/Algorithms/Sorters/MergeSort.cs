@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
-
 
 namespace AD
 {
@@ -14,13 +12,12 @@ namespace AD
 
         public void InternalSort(List<int> list, int left, int right)
         {
-            if (left < right)
-            {
-                var center = (int) Math.Ceiling(left + right) / 2);
-                InternalSort(list, left, center);
-                InternalSort(list, center + 1, right);
-                Merge(list, left, center, right);
-            }
+            if (left >= right) return;
+
+            var center = (int) Math.Ceiling((decimal) (left + right)) / 2;
+            InternalSort(list, left, center);
+            InternalSort(list, center + 1, right);
+            Merge(list, left, center, right);
         }
 
         public void Merge(List<int> list, int left, int center, int right)
@@ -28,16 +25,19 @@ namespace AD
             var n1 = center - left + 1;
             var n2 = right - center;
 
-            var leftList = list.GetRange(left, center);
-            var rightList = list.GetRange(center + 1, right + 1);
+            var leftList = list.GetRange(left, n1);
+            var rightList = list.GetRange(center + 1, n2);
 
-            leftList.Add(Int32.MaxValue);
-            rightList.Add(Int32.MaxValue);
+            Console.WriteLine(leftList);
+
+            leftList.Add(int.MaxValue);
+            rightList.Add(int.MaxValue);
 
             var i = 0;
             var j = 0;
 
-            for (var k = left; k < right; k++)
+            int k;
+            for (k = left; k < right; k++)
             {
                 if (leftList[i] <= rightList[j])
                 {
@@ -49,6 +49,20 @@ namespace AD
                     list[k] = rightList[j];
                     j++;
                 }
+            }
+
+            while (i < n1)
+            {
+                list[k] = leftList[i];
+                i++;
+                k++;
+            }
+
+            while (j < n2)
+            {
+                list[k] = rightList[j];
+                j++;
+                k++;
             }
         }
 
