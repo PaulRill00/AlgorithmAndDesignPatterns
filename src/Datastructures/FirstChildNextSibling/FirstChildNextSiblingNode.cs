@@ -1,4 +1,4 @@
-namespace AD
+    namespace AD
 {
     public partial class FirstChildNextSiblingNode<T> : IFirstChildNextSiblingNode<T>
     {
@@ -6,29 +6,45 @@ namespace AD
         public FirstChildNextSiblingNode<T> nextSibling;
         public T data;
 
-        public FirstChildNextSiblingNode(T data, FirstChildNextSiblingNode<T> firstChild, FirstChildNextSiblingNode<T> nextSibling)
+        public FirstChildNextSiblingNode(T data, FirstChildNextSiblingNode<T> firstChild, FirstChildNextSiblingNode<T> nextSibling): this(data)
         {
-            throw new System.NotImplementedException();
+            this.firstChild = firstChild;
+            this.nextSibling = nextSibling;
         }
 
         public FirstChildNextSiblingNode(T data)
         {
-            throw new System.NotImplementedException();
+            this.data = data;
         }
 
         public T GetData()
         {
-            throw new System.NotImplementedException();
+            return this.data;
         }
 
         public FirstChildNextSiblingNode<T> GetFirstChild()
         {
-            throw new System.NotImplementedException();
+            return this.firstChild;
         }
 
         public FirstChildNextSiblingNode<T> GetNextSibling()
         {
-            throw new System.NotImplementedException();
+            return this.nextSibling;
+        }
+
+        public override string ToString()
+        {
+            var res = $"{data}";
+            if (this.firstChild != null)
+            {
+                res += $",FC({this.firstChild})";
+            }
+
+            if (this.nextSibling != null)
+            {
+                res += $",NS({this.nextSibling})";
+            }
+            return res;
         }
     }
 }
