@@ -7,7 +7,7 @@ namespace AD
     {
         public override void Sort(List<int> list)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

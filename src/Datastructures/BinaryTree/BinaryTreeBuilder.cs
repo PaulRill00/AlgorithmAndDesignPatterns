@@ -23,7 +23,18 @@ namespace AD
         //
         public static IBinaryTree<int> CreateBinaryTreeInt()
         {
-            throw new System.NotImplementedException();
+            var five = new BinaryTree<int>();
+            var two = new BinaryTree<int>();
+            var six = new BinaryTree<int>(6);
+            var eight = new BinaryTree<int>(8);
+            var seven = new BinaryTree<int>();
+            var one = new BinaryTree<int>(1);
+
+            seven.Merge(7, one, null);
+            two.Merge(2, eight, seven);
+            five.Merge(5, two, six);
+
+            return five;
         }
 
         //

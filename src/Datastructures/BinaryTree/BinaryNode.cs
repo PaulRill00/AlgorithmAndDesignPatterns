@@ -6,7 +6,7 @@ namespace AD
         public BinaryNode<T> left;
         public BinaryNode<T> right;
 
-        public BinaryNode() : this(default(T), default(BinaryNode<T>), default(BinaryNode<T>)) { }
+        public BinaryNode() : this(default, default, default) { }
 
         public BinaryNode(T data, BinaryNode<T> left, BinaryNode<T> right)
         {
@@ -20,17 +20,32 @@ namespace AD
         //----------------------------------------------------------------------
         public T GetData()
         {
-            throw new System.NotImplementedException();
+            return this.data;
         }
 
         public BinaryNode<T> GetLeft()
         {
-            throw new System.NotImplementedException();
+            return this.left;
         }
 
         public BinaryNode<T> GetRight()
         {
-            throw new System.NotImplementedException();
+            return this.right;
+        }
+
+        public string ToPrefixString()
+        {
+            return $"[ {this.data} {this.left?.ToPrefixString() ?? "NIL"} {this.right?.ToPrefixString() ?? "NIL"} ]";
+        }
+
+        public string ToInfixString()
+        {
+            return $"[ {this.left?.ToInfixString() ?? "NIL"} {this.data} {this.right?.ToInfixString() ?? "NIL"} ]";
+        }
+
+        public string ToPostfixString()
+        {
+            return $"[ {this.left?.ToPostfixString() ?? "NIL"} {this.right?.ToPostfixString() ?? "NIL"} {this.data} ]";
         }
     }
 }
