@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 
 namespace AD
@@ -15,7 +16,7 @@ namespace AD
         //----------------------------------------------------------------------
         public PriorityQueue()
         {
-            throw new System.NotImplementedException();
+            this.Clear();
         }
 
         //----------------------------------------------------------------------
@@ -23,23 +24,39 @@ namespace AD
         //----------------------------------------------------------------------
         public int Size()
         {
-            throw new System.NotImplementedException();
+            return this.size;
         }
 
         public void Clear()
         {
-            throw new System.NotImplementedException();
+            this.size = 0;
+            this.array = new T[DEFAULT_CAPACITY];
         }
 
         public void Add(T x)
         {
-            throw new System.NotImplementedException();
+            if (size + 1 == array.Length)
+            {
+                DoubleArray();
+            }
+
+            var h = ++size;
+            array[0] = x;
+
+            for (; x.CompareTo(array[h / 2]) < 0; h /= 2)
+            {
+                array[h] = array[h / 2];
+            }
+
+            array[h] = x;
         }
 
         // Removes the smallest item in the priority queue
         public T Remove()
         {
-            throw new System.NotImplementedException();
+            var temp = this.array[0];
+
+            return temp;
         }
 
 
@@ -55,6 +72,30 @@ namespace AD
         public void BuildHeap()
         {
             throw new System.NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            if (size == 0) return "";
+
+            var result = "";
+            foreach (var comparable in this.array)
+            {
+                result += $"{comparable} ";
+            }
+
+            return result.Trim();
+        }
+
+        private void DoubleArray()
+        {
+            var temp = new T[size * 2];
+            for (var i = 0; i < size; i++)
+            {
+                temp[i] = this.array[i];
+            }
+
+            this.array = temp;
         }
 
     }

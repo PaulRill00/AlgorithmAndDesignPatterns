@@ -8,6 +8,8 @@ namespace AD
 
         public BinaryNode() : this(default, default, default) { }
 
+        public BinaryNode(T data) : this(data, default, default) { }
+
         public BinaryNode(T data, BinaryNode<T> left, BinaryNode<T> right)
         {
             this.data = data;
