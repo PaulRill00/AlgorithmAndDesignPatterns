@@ -6,7 +6,7 @@ namespace AD
 {
     public partial class QuickSort : Sorter
     {
-        private static int CUTOFF = 3;
+        private static int CUTOFF = 11;
 
         public override void Sort(List<int> list)
         {
@@ -16,7 +16,7 @@ namespace AD
         private void InternalSort(List<int> list, int low, int high)
         {
             if (high < low) return;
-            if (high - low < 10)
+            if (high - low < CUTOFF)
             {
                 new InsertionSort().Sort(list);
                 return;
