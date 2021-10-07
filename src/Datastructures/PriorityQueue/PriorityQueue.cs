@@ -102,6 +102,8 @@ namespace AD
             while (i > 0)
             {
                 var parentI = i / 2;
+                if (parentI < 1) break;
+
                 if (array[parentI].CompareTo(array[i]) > 0)
                 {
                     var temp = array[parentI];
