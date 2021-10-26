@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace AD
@@ -17,7 +19,7 @@ namespace AD
 
         public Graph()
         {
-            throw new System.NotImplementedException();
+            vertexMap = new Dictionary<string, Vertex>();
         }
 
 
@@ -32,7 +34,10 @@ namespace AD
         /// <param name="name">The name of the new vertex</param>
         public void AddVertex(string name)
         {
-            throw new System.NotImplementedException();
+            if (!this.vertexMap.ContainsKey(name))
+            {
+                this.vertexMap.Add(name, new Vertex(name));
+            }
         }
 
 
@@ -44,7 +49,12 @@ namespace AD
         /// <returns>The vertex withe the given name</returns>
         public Vertex GetVertex(string name)
         {
-            throw new System.NotImplementedException();
+            if (!this.vertexMap.ContainsKey(name))
+            {
+                AddVertex(name);
+            }
+
+            return this.vertexMap.GetValueOrDefault(name);
         }
 
 
@@ -58,7 +68,12 @@ namespace AD
         /// <param name="cost">cost of the edge</param>
         public void AddEdge(string source, string dest, double cost = 1)
         {
-            throw new System.NotImplementedException();
+            var sourceVert = this.GetVertex(source);
+            var destVert = this.GetVertex(dest);
+
+            if (sourceVert == default || destVert == default) return;
+
+            sourceVert.adj.AddLast(new Edge(destVert, cost));
         }
 
 
@@ -68,7 +83,10 @@ namespace AD
         /// </summary>
         public void ClearAll()
         {
-            throw new System.NotImplementedException();
+            foreach (var vertexMapValue in this.vertexMap.Values)
+            {
+                vertexMapValue.Reset();
+            }
         }
 
         /// <summary>
@@ -77,7 +95,26 @@ namespace AD
         /// <param name="name">The name of the starting vertex</param>
         public void Unweighted(string name)
         {
-            throw new System.NotImplementedException();
+            ClearAll();
+
+            Queue<Vertex> queue = new Queue<Vertex>();
+            var start = GetVertex(name);
+            start.distance = 0;
+            queue.Enqueue(start);
+
+            while (queue.Count > 0)
+            {
+                var v = queue.Dequeue();
+                foreach (var n in v.GetAdjacents())
+                {
+                    if (n.dest.distance != INFINITY) continue;
+
+                    n.dest.distance = v.distance + 1;
+                    n.dest.prev = v;
+                    queue.Enqueue(n.dest);
+                }
+            }
+
         }
 
         /// <summary>
@@ -86,7 +123,34 @@ namespace AD
         /// <param name="name">The name of the starting vertex</param>
         public void Dijkstra(string name)
         {
-            throw new System.NotImplementedException();
+            ClearAll();
+
+            var start = GetVertex(name);
+            start.distance = 0;
+
+            var priorityQueue = new PriorityQueue<Vertex>();
+            priorityQueue.Add(start);
+
+            while (priorityQueue.Size() > 0)
+            {
+                var vert = priorityQueue.Remove();
+                if (vert.known) continue;
+
+                vert.known = true;
+                foreach (var adjacent in vert.GetAdjacents())
+                {
+                    var w = adjacent.dest;
+                    if (w.known) continue;
+
+                    if (vert.distance + adjacent.cost < w.distance)
+                    {
+                        w.distance = vert.distance + adjacent.cost;
+                        w.prev = vert;
+                    }
+
+                    priorityQueue.Add(w);
+                }
+            }
         }
 
         //----------------------------------------------------------------------
@@ -101,7 +165,14 @@ namespace AD
         /// <returns>The string representation of this Graph instance</returns>
         public override string ToString()
         {
-            throw new System.NotImplementedException();
+            var str = "";
+            foreach (var vert in this.vertexMap.Keys.OrderBy(x => x))
+            {
+                var vertValue = this.vertexMap.GetValueOrDefault(vert);
+                str += vertValue?.ToString() ?? "" + "\n"; 
+            }
+
+            return str;
         }
 
 

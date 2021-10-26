@@ -77,11 +77,6 @@ namespace AD
 
         public void Remove(T x)
         {
-            if (this.IsEmpty())
-            {
-                throw new BinarySearchTreeEmptyException();
-            }
-
             BinaryNode<T> parent = null;
             var next = this.root;
 
@@ -100,15 +95,14 @@ namespace AD
                 next = temp;
             }
 
-            if (parent == null)
+            if (next == null || !next.data.Equals(x))
             {
-                this.root = null;
-                return;
+                throw new BinarySearchTreeElementNotFoundException();
             }
 
             BinaryNode<T> newNode = null;
 
-            if (next.right != null)
+            if (next.right != null && next.left != null)
             {
                 newNode = FindMinNode(next.right);
                 var newNodeParent = FindParent(newNode);
@@ -122,9 +116,19 @@ namespace AD
                 if (!newNode.data.Equals(next.right.data))
                     newNode.right = next.right;
             }
+            else if (next.right != null)
+            {
+                newNode = next.right;
+            }
             else if (next.left != null)
             {
                 newNode = next.left;
+            }
+
+            if (this.root.data.Equals(x))
+            {
+                this.root = newNode;
+                return;
             }
 
             if (IsLeftChild(parent, x))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 
 
 namespace AD
@@ -8,20 +9,14 @@ namespace AD
         where T : IComparable<T>
     {
         public static int DEFAULT_CAPACITY = 100;
-        public int size;   // Number of elements in heap
-        public T[] array;  // The heap array
+        public int size;
+        public T[] array;
 
-        //----------------------------------------------------------------------
-        // Constructor
-        //----------------------------------------------------------------------
         public PriorityQueue()
         {
             this.Clear();
         }
 
-        //----------------------------------------------------------------------
-        // Interface methods that have to be implemented for exam
-        //----------------------------------------------------------------------
         public int Size()
         {
             return this.size;
@@ -31,6 +26,7 @@ namespace AD
         {
             this.size = 0;
             this.array = new T[DEFAULT_CAPACITY];
+            this.array[0] = default;
         }
 
         public void Add(T x)
@@ -40,38 +36,40 @@ namespace AD
                 DoubleArray();
             }
 
-            var h = ++size;
-            array[0] = x;
-
-            for (; x.CompareTo(array[h / 2]) < 0; h /= 2)
-            {
-                array[h] = array[h / 2];
-            }
-
-            array[h] = x;
+            array[++size] = x;
+            PerculateUp(size);
         }
 
         // Removes the smallest item in the priority queue
         public T Remove()
         {
-            var temp = this.array[0];
+            if (this.size == 0)
+            {
+                throw new PriorityQueueEmptyException();
+            }
+
+            var temp = array[1];
+            array[1] = array[size];
+            array[size] = default;
+            size--;
+
+            PerculateDown(1);
 
             return temp;
         }
 
 
-        //----------------------------------------------------------------------
-        // Interface methods that have to be implemented for homework
-        //----------------------------------------------------------------------
-
         public void AddFreely(T x)
         {
-            throw new System.NotImplementedException();
+            array[++size] = x;
         }
 
         public void BuildHeap()
         {
-            throw new System.NotImplementedException();
+            for (var i = size / 2; i > 0; i--)
+            {
+                PerculateDown(i);
+            }
         }
 
         public override string ToString()
@@ -79,8 +77,9 @@ namespace AD
             if (size == 0) return "";
 
             var result = "";
-            foreach (var comparable in this.array)
+            for(var i = 1; i <= size; i++)
             {
+                var comparable = array[i];
                 result += $"{comparable} ";
             }
 
@@ -90,7 +89,7 @@ namespace AD
         private void DoubleArray()
         {
             var temp = new T[size * 2];
-            for (var i = 0; i < size; i++)
+            for (var i = 0; i <= size; i++)
             {
                 temp[i] = this.array[i];
             }
@@ -98,5 +97,58 @@ namespace AD
             this.array = temp;
         }
 
+        private void PerculateUp(int i)
+        {
+            while (i > 0)
+            {
+                var parentI = i / 2;
+                if (parentI < 1) break;
+
+                if (array[parentI].CompareTo(array[i]) > 0)
+                {
+                    var temp = array[parentI];
+                    array[parentI] = array[i];
+                    array[i] = temp;
+                    i = parentI;
+                }else
+                {
+                    break;
+                }
+            }
+        }
+
+        private void PerculateDown(int i)
+        {
+            var x = array[i];
+
+            while (i <= size)
+            {
+                var leftI = 2 * i;
+                var rightI = 2 * i + 1;
+
+                // check childless
+                if (leftI > size && rightI > size) break;
+
+                var leftGreater = array[i].CompareTo(array[leftI]) > 0 && leftI <= size;
+                var rightGreater = array[i].CompareTo(array[rightI]) > 0 && rightI <= size;
+
+                if (!leftGreater && !rightGreater) break;
+
+                if (rightI > size || array[leftI].CompareTo(array[rightI]) < 0)
+                {
+                    var temp = array[leftI];
+                    array[leftI] = x;
+                    array[i] = temp;
+                    i = leftI;
+                }
+                else
+                {
+                    var temp = array[rightI];
+                    array[rightI] = x;
+                    array[i] = temp;
+                    i = rightI;
+                }
+            }
+        }
     }
 }

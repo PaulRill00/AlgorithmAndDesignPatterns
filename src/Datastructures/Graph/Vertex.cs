@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AD
 {
-    public partial class Vertex : IVertex
+    public partial class Vertex : IVertex, IComparable<Vertex>
     {
         public string name;
         public LinkedList<Edge> adj;
@@ -24,7 +24,9 @@ namespace AD
         /// <param name="name">The name of the new vertex</param>
         public Vertex(string name)
         {
-            throw new System.NotImplementedException();
+            this.name = name;
+            this.adj = new LinkedList<Edge>();
+            this.Reset();
         }
 
 
@@ -34,37 +36,47 @@ namespace AD
 
         public string GetName()
         {
-            throw new System.NotImplementedException();
+            return this.name;
         }
         public LinkedList<Edge> GetAdjacents()
         {
-            throw new System.NotImplementedException();
+            return this.adj;
         }
 
         public double GetDistance()
         {
-            throw new System.NotImplementedException();
+            return this.distance;
         }
 
         public Vertex GetPrevious()
         {
-            throw new System.NotImplementedException();
+            return this.prev;
         }
 
         public bool GetKnown()
         {
-            throw new System.NotImplementedException();
+            return this.known;
         }
 
         public void Reset()
         {
-            throw new System.NotImplementedException();
+            this.prev = null;
+            this.distance = Graph.INFINITY;
+            this.known = false;
         }
 
 
         //----------------------------------------------------------------------
         // ToString that has to be implemented for exam
         //----------------------------------------------------------------------
+
+        public int CompareTo(Vertex other)
+        {
+            if (other == null) return 0;
+            if (other.distance == this.distance) return 0;
+
+            return this.distance < other.distance ? -1 : 1;
+        }
 
         /// <summary>
         ///    Converts this instance of Vertex to its string representation.
@@ -75,7 +87,10 @@ namespace AD
         /// <returns>The string representation of this Graph instance</returns> 
         public override string ToString()
         {
-            throw new System.NotImplementedException();
+            var selfDistance = distance == Graph.INFINITY ? "" : $"({this.GetDistance()})";
+            var adjString = this.GetAdjacents().OrderBy(x => x.dest.GetName())
+                .Aggregate("", (current, adjacent) => current + (adjacent.dest == null ? "" : $"{adjacent.dest.GetName()}({adjacent.cost})"));
+            return $"{this.GetName()}{selfDistance}[{adjString}]";
         }
     }
 }
