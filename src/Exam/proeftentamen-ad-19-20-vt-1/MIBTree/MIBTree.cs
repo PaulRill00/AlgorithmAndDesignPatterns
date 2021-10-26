@@ -1,4 +1,7 @@
-﻿namespace AD
+﻿using System;
+using System.Linq;
+
+namespace AD
 {
     public class MIBTree : BinarySearchTree<MIBNode>
     {
@@ -24,12 +27,24 @@
 
         public MIBNode FindNode(string oid)
         {
-            throw new System.NotImplementedException();
+            var tmp = new MIBNode(oid, "");
+            var find = Find(tmp);
+
+            return find.data.oid == oid ? find.data : null;
         }
 
         public bool AllNodesAvailable(string oid)
         {
-            throw new System.NotImplementedException();
+            var available = FindNode(oid);
+            if (available == null) return false;
+            
+            var split = oid.Split(".");
+            var res = new string[split.Length - 1];
+            Array.Copy(split, 0, res, 0, res.Length);
+
+            if (res.Length == 0) return true;
+
+            return AllNodesAvailable(String.Join(".", res));
         }
     }
 }

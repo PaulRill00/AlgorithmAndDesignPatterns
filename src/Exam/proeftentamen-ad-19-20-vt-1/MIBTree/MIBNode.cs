@@ -17,5 +17,16 @@ namespace AD
         {
             return oid.CompareTo(other.oid);
         }
+
+        public override string ToString()
+        {
+            return $"{oid}: {name}";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            var node = obj as MIBNode;
+            return node != null && oid.Equals(node.oid);
+        }
     }
 }

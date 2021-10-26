@@ -152,7 +152,7 @@ namespace AD
             return IsEmpty() ? "" : this.InOrder();
         }
 
-        private BinaryNode<T> Find(T x)
+        protected BinaryNode<T> Find(T x)
         {
             BinaryNode<T> parent = null;
             var next = this.root;
@@ -172,7 +172,7 @@ namespace AD
             return parent;
         }
 
-        private bool IsLeftChild(BinaryNode<T> node, T x)
+        protected bool IsLeftChild(BinaryNode<T> node, T x)
         {
             return x.CompareTo(node.data) < 0;
         }
