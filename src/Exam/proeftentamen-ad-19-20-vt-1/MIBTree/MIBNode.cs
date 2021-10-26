@@ -25,8 +25,7 @@ namespace AD
 
         public override bool Equals(object? obj)
         {
-            var node = obj as MIBNode;
-            return node != null && oid.Equals(node.oid);
+            return obj is MIBNode node && oid.Equals(node.oid);
         }
     }
 }
