@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\datastructures\PriorityQueue\PriorityQueueTests.cs" Link="PriorityQueueTests\PriorityQueueTests.cs" />
+    <Compile Include="..\..\..\Utils\TestUtils.cs" Link="TestUtils\TestUtils.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RemovePriority\PQRemovePriority.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TestUtils\" />
+    <Folder Include="PriorityQueueTests\" />
+  </ItemGroup>
+
+</Project>

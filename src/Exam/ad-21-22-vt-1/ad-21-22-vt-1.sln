@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schatzoeker2", "Schatzoeker2\Schatzoeker2.csproj", "{6BC5BA7A-D593-4998-8742-9E21FB03B6F9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schatzoeker2Tests", "Schatzoeker2Tests\Schatzoeker2Tests.csproj", "{9710B2BA-A7ED-4C8E-9838-6C2F67637387}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SplitsRits", "SplitsRits\SplitsRits.csproj", "{49CEBED0-A648-4663-984F-42069FBA1CB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitsRitsTests", "SplitsRitsTests\SplitsRitsTests.csproj", "{A757898E-AB52-495B-9D46-9704C2478984}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PQRemovePriority", "RemovePriority\PQRemovePriority.csproj", "{071998E6-E886-4A66-B900-EE3646304D3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PQRemovePriorityTests", "RemovePriorityTests\PQRemovePriorityTests.csproj", "{8724804B-6871-4EE7-BF39-B124D06108B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BC5BA7A-D593-4998-8742-9E21FB03B6F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC5BA7A-D593-4998-8742-9E21FB03B6F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC5BA7A-D593-4998-8742-9E21FB03B6F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC5BA7A-D593-4998-8742-9E21FB03B6F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9710B2BA-A7ED-4C8E-9838-6C2F67637387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9710B2BA-A7ED-4C8E-9838-6C2F67637387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9710B2BA-A7ED-4C8E-9838-6C2F67637387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9710B2BA-A7ED-4C8E-9838-6C2F67637387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CEBED0-A648-4663-984F-42069FBA1CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CEBED0-A648-4663-984F-42069FBA1CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CEBED0-A648-4663-984F-42069FBA1CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CEBED0-A648-4663-984F-42069FBA1CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A757898E-AB52-495B-9D46-9704C2478984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A757898E-AB52-495B-9D46-9704C2478984}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A757898E-AB52-495B-9D46-9704C2478984}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A757898E-AB52-495B-9D46-9704C2478984}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071998E6-E886-4A66-B900-EE3646304D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071998E6-E886-4A66-B900-EE3646304D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071998E6-E886-4A66-B900-EE3646304D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071998E6-E886-4A66-B900-EE3646304D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8724804B-6871-4EE7-BF39-B124D06108B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8724804B-6871-4EE7-BF39-B124D06108B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8724804B-6871-4EE7-BF39-B124D06108B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8724804B-6871-4EE7-BF39-B124D06108B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {924D89EE-9789-4766-8C21-BDB941C20A6B}
+	EndGlobalSection
+EndGlobal
